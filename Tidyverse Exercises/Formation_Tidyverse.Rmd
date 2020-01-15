@@ -1,8 +1,8 @@
 ---
-title: "Tidyverse exercises"
+title: "Formation Tidyverse"
 subtitle: ""
 author: "Cécile Sauder"
-date: "2019/02/12"
+date: "2020/01/30"
 output:
   xaringan::moon_reader:
     css: ["default", "rladies", "rladies-fonts", "my_theme.css"]
@@ -30,7 +30,7 @@ layout: true
 <div class="my-footer"><span>Cécile SAUDER    
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-12/02/2019</span></div> 
+30-31/01/2020</span></div> 
 ---
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyverse.svg?sanitize=true)
 background-size: 550px
