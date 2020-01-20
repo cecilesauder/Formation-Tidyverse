@@ -23,11 +23,37 @@ layout: true
 &lt;div class="my-footer"&gt;&lt;span&gt;Cécile SAUDER    
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
-30-31/01/2020&lt;/span&gt;&lt;/div&gt; 
+30-31 janvier 2020&lt;/span&gt;&lt;/div&gt; 
 ---
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyverse.svg?sanitize=true)
 background-size: 550px
 background-position: 50% 50%
+
+
+---
+
+
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;   
+
+
+
+
+1. Présentation Tidyverse et tidy data    
+
+2. Importer les données (readr, haven, readxl)    
+
+3. Ceci n'est pas un pipe (magrittr)    
+
+4. Programmation fonctionnelle  (purrr)    
+
+5. Manipuler les données (dplyr, tidyr, tibble)    
+
+6. Transformer et nettoyer (forcats, stringr, lubridate)    
+
+7. Modéliser (broom)    
+
+8. Communiquer (rmarkdown, blogdown, xaringan, shiny)    
 
 
 ---
@@ -75,12 +101,11 @@ library(tidyverse)
 
 # Data
 
-If you have your proper data you want to tidy, perfect, if not, I prepared you some exercises with the famous [**gapminder**](https://www.gapminder.org/videos/ted-us-state-department/) dataset.  
-I was inspired by [David Robinson's course](https://www.datacamp.com/courses/introduction-to-the-tidyverse) on DataCamp.
+Jeu de données [**gapminder**](https://www.gapminder.org/videos/ted-us-state-department/).  
 
-1. Install and load the `tidyverse` 📦 if it is not already done  
-2. Install and load the `gapminder` 📦   
-3. Look at the gapminder dataset
+1. Installer et charger le `tidyverse` 📦  
+2. Installer et charger le `gapminder` 📦   
+3. Regarder le jeu de données gapminder
 
 --
 
@@ -150,10 +175,10 @@ gapminder %&gt;% head(3)
 
 # Filter
 
-1\. Filter the gapminder dataset for the year 2007
+1\. Filtrer les données pour l'année 2007
 --
 
- - Hint: Don't forget to use `==` for a condition  
+ - 💡 : condition `==`  
 
 --
 
@@ -162,10 +187,10 @@ gapminder %&gt;%
   filter(year == 2007)
 ```
 --
-2\. Filter the gapminder dataset for China and the year 2002
+2\. Filtrer les données pour la Chine en 2002
 --
 
- - Hint: and = `&amp;`  
+ - 💡 : `&amp;`  
 
 --
 
@@ -178,7 +203,7 @@ gapminder %&gt;%
 
 # Arrange
 
-1\. Arrange the gapminder dataset by ascending population (`pop`)
+1\. Trier les données par population croissante (`pop`)
 
 --
 
@@ -190,11 +215,11 @@ gapminder %&gt;%
 
 --
 
-2\. Arrange the gapminder dataset by descending population (`pop`)
+2\. Trier les données par population décroissante (`pop`)
 
 --
 
- - Hint: `desc()`
+ - 💡 : `desc()`
 
 --
 
@@ -206,7 +231,7 @@ gapminder %&gt;%
 
 --
 
-3\. Filter gapminder for `France` and arrange by descending life expectancy`lifeExp`
+3\. Filtrer les données pour la `France` et les trier par espérance de vie décroissante `lifeExp`
 
 --
 
@@ -223,16 +248,16 @@ gapminder %&gt;%
 
 # Mutate
 
-1\. Create two new columns, one called `popMil` with the population in million
-and the other called `lifeExpMonths` with the life expectancy in months
+1\. Créer deux nouvelles colonnes, une appelée `popMil` avec la population en million
+et l'autre appelée `lifeExpMonths` avec l'espérance de vie en mois.
 
 --
 
- - Hint1: `pop / 100000` , `lifeExp * 12`
+ - 💡 1 : `pop / 100000` , `lifeExp * 12`
 
 --
 
- - Hint2: you can create as many columns as you want in the same `mutate()`
+ - 💡 2 : on peut créer plusieurs colonnes dans le même `mutate()`
  
 --
 
@@ -248,12 +273,11 @@ gapminder %&gt;%
 # Mutate 
 
 
-2\. Create a new colum `popUnderMillion` with 2 groups, one with `TRUE` when population `pop`is inferior to one million, and `FALSE` when  population is 
-superior or equal to one million
+2\. Créer une nouvelle colonne `popUnderMillion` avec 2 groupes, l'un avec `TRUE` quand la population `pop` est inférieure à 1 million, et `FALSE` quand la population est supérieure ou égale à 1 million
 
 --
 
- - Hint: use `if_else()`
+ - 💡 : use `if_else()`
 
 --
 
@@ -274,12 +298,11 @@ gapminder %&gt;%
 # Mutate 
 
 
-3\. Create a new column `lifeExpGroup` with three groups, `young` for `lifeExp`
-is inferior to 50, `middle` when `lifeExp` is between 50 and 70, and `old` when it's superior to 70.
+3\. Créer une nouvelle colonne `lifeExpGroup` avec 3 groupes, `young` quand `lifeExp` est inférieur à 50, `middle` quand `lifeExp` est entre 50 et 70, et `old` quand c'est supérieur à 70
 
 --
 
- - Hint: for more than to cases, use `case_when()`
+ - 💡 : Pour plus de 2 cas, utiliser `case_when()`
 
 --
 
@@ -301,11 +324,11 @@ gapminder %&gt;%
 
 # Select
 
-1\. Select the continents `continent` and the countries `country`
+1\. Selectionner les continents `continent` et les pays `country`
 
 --
 
- - Hint: You can use `starts_with("c")` (but it's not the only solution)
+ - 💡 : On peut utiliser `starts_with("c")` (mais ce n'est pas la seule solution)
 
 --
 
@@ -315,7 +338,7 @@ gapminder %&gt;%
   select(starts_with("c"))
 ```
 
-or
+ou
 
 
 ```r
@@ -325,7 +348,7 @@ gapminder %&gt;%
 
 --
 
-2\. Select all variables except life expectancy `lifeExp`
+2\. Selectionner toutes les variables sauf l'espérance de vie `lifeExp`
 
 --
 
@@ -340,11 +363,11 @@ gapminder %&gt;%
 
 # Select
 
-3\. Select all the numerical variables
+3\. Selectionner toutes les variables numériques
 
 --
 
- - Hint: You can use `select_if()`
+ - 💡 : On peut utiliser `select_if()`
 
 --
 
@@ -358,7 +381,7 @@ gapminder %&gt;%
 
 # Summarise and group_by
 
-1\. Find the mean `avg_lifeExp`, the standard deviation `sd_lifeExp` and the number of values `n_values` of `lifeExp` by `continent`, then arrange the results by descending `avg_lifeExp`.
+1\. Trouver la moyenne `avg_lifeExp`, la standard deviation `sd_lifeExp` et le nombre de valeurs `n_values` de `lifeExp` par `continent`, puis trier le résultat par `avg_lifeExp` décroissante.
 
 --
 
@@ -379,7 +402,7 @@ gapminder %&gt;%
 
 # Summarise and group_by
 
-2\. Find the mean of all the numerical variables
+2\. Trouver la moyenne de toutes les variables numériques
 
 --
 
@@ -401,10 +424,17 @@ gapminder %&gt;%
 
 # ggplot
 
-Now we have seen the basics of **Tidyverse**, let's continue with **ggplot2**. 
+Parfois vous savez quel graphe vous voulez, parfois non. 
 
-Sometimes you know what plot you want, but sometimes you don't. 
-In that case we can take a look at the webpage [**R Graph Gallery**](https://www.r-graph-gallery.com/), or at [**ggplot2 extensions**](https://www.ggplot2-exts.org/gallery/), or, if, like me, you love interactive plots, the [**plotly**](https://plot.ly/r/) 📦 is very cool.
+Plusieurs sites pour vous aider à choisir un graphe : 
+
+- [**From Data to Viz**](https://www.data-to-viz.com/)
+
+- [**R Graph Gallery**](https://www.r-graph-gallery.com/)
+
+- [**ggplot2 extensions**](https://www.ggplot2-exts.org/gallery/)
+
+- [**plotly**](https://plot.ly/r/)  pour les graphes interactifs
 
 
 ---
@@ -412,7 +442,7 @@ In that case we can take a look at the webpage [**R Graph Gallery**](https://www
 
 #ggplot geom_boxplot
 
-1\. Make boxplots of `lifeExp` by `continent`
+1\. Tracer les boxplots de `lifeExp` par `continent`
 
 --
 
@@ -425,12 +455,12 @@ gapminder %&gt;%
 
 --
 
-2\. Customize your plot 
-  - Reorder the boxplots with `forcats::fct_reorder`
-  - Color the boxplots with the `aes fill`
-  - Change the label axis with `labs()`
-  - `coord_flip` your plot
-  - Remove the legend
+2\. Customizer votre graphe
+  - Réordonner les boxplots avec `forcats::fct_reorder`
+  - Colorer les boxplots avec `aes fill`
+  - Modifier les noms des axes avec `labs()`
+  - Inverser les axes du graphe avec `coord_flip`
+  - Enlever la légende
 
   
 --
@@ -468,7 +498,7 @@ ggplotly(p)
 
 #ggplot geom_point
 
-1\. Try to reproduce this plot 
+1\. Essayer de reproduire ce graphe
 
 ![](Formation_Tidyverse_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 
@@ -477,7 +507,7 @@ ggplotly(p)
 
 #ggplot
 
-Hints : 
+💡  : 
 
 1\. Use the aes `size` and `color`
 
