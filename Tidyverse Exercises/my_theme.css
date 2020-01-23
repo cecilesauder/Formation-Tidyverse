@@ -1,11 +1,11 @@
 div.my-header {
-    background-image: url(img/rladies.svg);
+    /* background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyverse.svg?sanitize=true); */
     background-size: cover;
     position: fixed;
     top: 0px;
     left: 0px;
     height: 50px;
-    width: 7%;
+    width: 5%;
     text-align: left;
 }
 

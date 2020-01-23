@@ -62,7 +62,16 @@ background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tid
 background-size: 100px
 background-position: 90% 3%
 
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;1. Présentation Tidyverse et tidy data  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
 # [www.tidyverse.org](www.tidyverse.org)
+
+
+
 
 
 
@@ -98,14 +107,26 @@ library(tidyverse)
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;1. Présentation Tidyverse et tidy data  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Tidy Data
+
+diapo TIdy data de RLadies
+
+---
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;1. Présentation Tidyverse et tidy data  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Data
 
-Jeu de données [**gapminder**](https://www.gapminder.org/videos/ted-us-state-department/).  
+Extrait du jeu de données [**gapminder**](https://www.gapminder.org/) ([**video ted**](https://www.gapminder.org/videos/ted-us-state-department/).  
 
 1. Installer et charger le `tidyverse` 📦  
 2. Installer et charger le `gapminder` 📦   
-3. Regarder le jeu de données gapminder
+3. Regarder le jeu de données gapminder (Est-il tidy ?)
 
 --
 
@@ -136,11 +157,117 @@ gapminder
 
 ---
 
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/readr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;2. Importer des données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# read_ (and write_)
+
+read_csv (,) 
+read_csv2 (;)
+read_delim (?)
+
+
+
+```r
+gapminder_bis &lt;- read_csv("data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.csv")
+```
+
+```
+## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   country = col_character()
+## )
+```
+
+```
+## See spec(...) for full column specifications.
+```
+
+```r
+gapminder_bis
+```
+
+```
+## # A tibble: 190 x 49
+##    country `1970` `1971` `1972` `1973` `1974` `1975` `1976` `1977` `1978`
+##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Afghan…  0.167  0.161  0.161  0.169  0.167  0.174  0.181  0.193  0.199
+##  2 Albania NA     NA     NA     NA     NA     NA      0.931 NA      0.932
+##  3 Algeria NA      0.599  0.624  0.64   0.648  0.658  0.667  0.681  0.691
+##  4 Andorra NA     NA     NA     NA     NA      1.15  NA     NA     NA    
+##  5 Angola  NA      0.556  0.575 NA     NA     NA     NA     NA     NA    
+##  6 Antigu… NA     NA     NA     NA      1.15   1.02  NA      1.04   0.842
+##  7 Argent…  1.03   1.03   1.02   1.03   1.03   1.03   1.03   1.03   1.04 
+##  8 Armenia NA     NA     NA     NA     NA     NA     NA     NA     NA    
+##  9 Austra… NA     NA     NA     NA     NA     NA     NA     NA     NA    
+## 10 Austria NA      0.936 NA     NA     NA     NA      0.925 NA     NA    
+## # … with 180 more rows, and 39 more variables: `1979` &lt;dbl&gt;, `1980` &lt;dbl&gt;,
+## #   `1981` &lt;dbl&gt;, `1982` &lt;dbl&gt;, `1983` &lt;dbl&gt;, `1984` &lt;dbl&gt;, `1985` &lt;dbl&gt;,
+## #   `1986` &lt;dbl&gt;, `1987` &lt;dbl&gt;, `1988` &lt;dbl&gt;, `1989` &lt;dbl&gt;, `1990` &lt;dbl&gt;,
+## #   `1991` &lt;dbl&gt;, `1992` &lt;dbl&gt;, `1993` &lt;dbl&gt;, `1994` &lt;dbl&gt;, `1995` &lt;dbl&gt;,
+## #   `1996` &lt;dbl&gt;, `1997` &lt;dbl&gt;, `1998` &lt;dbl&gt;, `1999` &lt;dbl&gt;, `2000` &lt;dbl&gt;,
+## #   `2001` &lt;dbl&gt;, `2002` &lt;dbl&gt;, `2003` &lt;dbl&gt;, `2004` &lt;dbl&gt;, `2005` &lt;dbl&gt;,
+## #   `2006` &lt;dbl&gt;, `2007` &lt;dbl&gt;, `2008` &lt;dbl&gt;, `2009` &lt;dbl&gt;, `2010` &lt;dbl&gt;,
+## #   `2011` &lt;dbl&gt;, `2012` &lt;dbl&gt;, `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;dbl&gt;,
+## #   `2016` &lt;dbl&gt;, `2017` &lt;dbl&gt;
+```
+
+Si vous faites du webscraping avec rvest par exemple, vous 
+
+---
+
+
+```r
+#install.package("readxl)
+
+library(readxl)
+
+gapminder_bis &lt;- read_xlsx("data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.xlsx")
+
+gapminder_bis
+```
+
+```
+## # A tibble: 190 x 49
+##    country `1970` `1971` `1972` `1973` `1974` `1975` `1976` `1977` `1978`
+##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Afghan…  0.167  0.161  0.161  0.169  0.167  0.174  0.181  0.193  0.199
+##  2 Albania NA     NA     NA     NA     NA     NA      0.931 NA      0.932
+##  3 Algeria NA      0.599  0.624  0.64   0.648  0.658  0.667  0.681  0.691
+##  4 Andorra NA     NA     NA     NA     NA      1.15  NA     NA     NA    
+##  5 Angola  NA      0.556  0.575 NA     NA     NA     NA     NA     NA    
+##  6 Antigu… NA     NA     NA     NA      1.15   1.02  NA      1.04   0.842
+##  7 Argent…  1.03   1.03   1.02   1.03   1.03   1.03   1.03   1.03   1.04 
+##  8 Armenia NA     NA     NA     NA     NA     NA     NA     NA     NA    
+##  9 Austra… NA     NA     NA     NA     NA     NA     NA     NA     NA    
+## 10 Austria NA      0.936 NA     NA     NA     NA      0.925 NA     NA    
+## # … with 180 more rows, and 39 more variables: `1979` &lt;dbl&gt;, `1980` &lt;dbl&gt;,
+## #   `1981` &lt;dbl&gt;, `1982` &lt;dbl&gt;, `1983` &lt;dbl&gt;, `1984` &lt;dbl&gt;, `1985` &lt;dbl&gt;,
+## #   `1986` &lt;dbl&gt;, `1987` &lt;dbl&gt;, `1988` &lt;dbl&gt;, `1989` &lt;dbl&gt;, `1990` &lt;dbl&gt;,
+## #   `1991` &lt;dbl&gt;, `1992` &lt;dbl&gt;, `1993` &lt;dbl&gt;, `1994` &lt;dbl&gt;, `1995` &lt;dbl&gt;,
+## #   `1996` &lt;dbl&gt;, `1997` &lt;dbl&gt;, `1998` &lt;dbl&gt;, `1999` &lt;dbl&gt;, `2000` &lt;dbl&gt;,
+## #   `2001` &lt;dbl&gt;, `2002` &lt;dbl&gt;, `2003` &lt;dbl&gt;, `2004` &lt;dbl&gt;, `2005` &lt;dbl&gt;,
+## #   `2006` &lt;dbl&gt;, `2007` &lt;dbl&gt;, `2008` &lt;dbl&gt;, `2009` &lt;dbl&gt;, `2010` &lt;dbl&gt;,
+## #   `2011` &lt;dbl&gt;, `2012` &lt;dbl&gt;, `2013` &lt;dbl&gt;, `2014` &lt;dbl&gt;, `2015` &lt;dbl&gt;,
+## #   `2016` &lt;dbl&gt;, `2017` &lt;dbl&gt;
+```
+
+---
 
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg?sanitize=true)
 background-size: 100px
 background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;3. Ceci n'est pas un pipe  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Pipe data
 
@@ -172,10 +299,12 @@ gapminder %&gt;% head(3)
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Filter
 
-1\. Filtrer les données pour l'année 2007
+1\. Filtrer les données pour l'année 1984
 --
 
  - 💡 : condition `==`  
@@ -184,10 +313,10 @@ gapminder %&gt;% head(3)
 
 ```r
 gapminder %&gt;%
-  filter(year == 2007)
+  filter(year == 1984)
 ```
 --
-2\. Filtrer les données pour la Chine en 2002
+2\. Filtrer les données pour l'Espagne en 2002
 --
 
  - 💡 : `&amp;`  
@@ -196,10 +325,12 @@ gapminder %&gt;%
 
 ```r
 gapminder %&gt;%
-  filter(country == "China" &amp; year == 2002)
+  filter(country == "Spain" &amp; year == 2002)
 ```
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Arrange
 
@@ -245,6 +376,8 @@ gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Mutate
 
@@ -269,11 +402,13 @@ gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Mutate 
 
 
-2\. Créer une nouvelle colonne `popUnderMillion` avec 2 groupes, l'un avec `TRUE` quand la population `pop` est inférieure à 1 million, et `FALSE` quand la population est supérieure ou égale à 1 million
+2\. Créer une nouvelle colonne `popUnderMillion` avec deux groupes, l'un avec `TRUE` quand la population `pop` est inférieure à un million, et `FALSE` quand la population est supérieure ou égale à un million
 
 --
 
@@ -294,6 +429,8 @@ gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Mutate 
 
@@ -320,6 +457,9 @@ gapminder %&gt;%
 ```
 
 ---
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 
 # Select
@@ -360,6 +500,8 @@ gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Select
 
@@ -376,8 +518,19 @@ gapminder %&gt;%
 gapminder %&gt;%
   select_if(is.numeric)
 ```
+
+iris %&gt;% 
+  purrr::keep(is.numeric) %&gt;% 
+  head(2)
+  
+iris %&gt;%
+  purrr::map_if(is.numeric, log) %&gt;%
+  head(2)
+
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Summarise and group_by
 
@@ -399,6 +552,8 @@ gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # Summarise and group_by
 
@@ -420,7 +575,8 @@ gapminder %&gt;%
 
 
 ---
-
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 # ggplot
 
@@ -439,6 +595,8 @@ Plusieurs sites pour vous aider à choisir un graphe :
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #ggplot geom_boxplot
 
@@ -479,6 +637,8 @@ p &lt;- gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #ggplot geom_boxplot + plotly
 
@@ -495,15 +655,19 @@ ggplotly(p)
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #ggplot geom_point
 
 1\. Essayer de reproduire ce graphe
 
-![](Formation_Tidyverse_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #ggplot
 
@@ -533,10 +697,12 @@ ggplotly(p)
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #ggplot
 
-Here is the complete code for the plot : 
+Code complet du graphe : 
 
 
 ```r
@@ -554,25 +720,29 @@ gapminder %&gt;%
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #gganimate your ggplot
 
-Now let's animate this ggplot by year. 
+Animons le ggplot suivant les années. 
 
-It's the example of the [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) 📦 by [Thomas Lin Pedersen](https://twitter.com/thomasp85). 
+Ceci est un exemple du [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) 📦 de [Thomas Lin Pedersen](https://twitter.com/thomasp85). 
 
-It's very easy to animate your previous plot with **gganimate**:
+Il est très facile d'animer le graphe précédent avec **gganimate**:
 
-1\. Load the [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) 📦
+1\. Charger [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) 📦
 
-2\. Copy the code of your previous plot
+2\. Copier le code du graphe précédent
 
-3\. Change `title = 'Year: 2002'` to `title = 'Year: {frame_time}'` 
+3\. Modifier `title = 'Year: 2002'` en `title = 'Year: {frame_time}'` 
 
-4\. Then add `+  transition_time(year)` 
+4\. Puis ajouter `+  transition_time(year)` 
 
 ---
 
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
 
 #And TADAAAAAA
 

@@ -69,8 +69,15 @@ background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tid
 background-size: 100px
 background-position: 90% 3%
 
+
+
+<div class="my-footer"><span> <b>1. Présentation Tidyverse et tidy data  </b>   
+</span></div> 
+
+
 # [www.tidyverse.org](www.tidyverse.org)
 
+1. Installer et charger le `tidyverse` `r emo::ji("package")`  
 
 
 ```{r}
@@ -87,36 +94,94 @@ library(tidyverse)
 ```{r, echo=FALSE}
 
 knitr::include_graphics("img/tidyband.png")
+
 ```
 
 
 ---
 
+<div class="my-footer"><span> <b>1. Présentation Tidyverse et tidy data  </b>   
+</span></div> 
+
+# Tidy Data
+
+diapo TIdy data de RLadies
+
+---
+
+
+<div class="my-footer"><span> <b>1. Présentation Tidyverse et tidy data  </b>   
+</span></div> 
 
 # Data
 
-Jeu de données [**gapminder**](https://www.gapminder.org/videos/ted-us-state-department/).  
+Extrait du jeu de données [**gapminder**](https://www.gapminder.org/) ([**video ted**](https://www.gapminder.org/videos/ted-us-state-department/))
 
-1. Installer et charger le `tidyverse` `r emo::ji("package")`  
-2. Installer et charger le `gapminder` `r emo::ji("package")`   
-3. Regarder le jeu de données gapminder
+1. Installer et charger le `gapminder` `r emo::ji("package")`   
+2. Regarder le jeu de données gapminder (Est-il tidy ?)
 
 --
 
 ```{r, results='markup'}
 #install.packages(gapminder)
+
 library(gapminder)
 
 gapminder
+
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/readr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>2. Importer des données  </b>   
+</span></div> 
+
+# read_ (and write_)
+
+read_csv (,) 
+read_csv2 (;)
+read_delim (?)
+
+
+```{r, results='markup'}
+
+gapminder_bis <- read_csv("data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.csv")
+
+gapminder_bis
+
+```
+
+Si vous faites du webscraping avec rvest par exemple, vous 
+
+---
+
+```{r, results='markup'}
+
+#install.package("readxl)
+
+library(readxl)
+
+gapminder_bis <- read_xlsx("data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.xlsx")
+
+gapminder_bis
+
 ```
 
 ---
 
 
-
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg?sanitize=true)
 background-size: 100px
 background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>3. Ceci n'est pas un pipe  </b>   
+</span></div> 
 
 # Pipe data
 
@@ -146,10 +211,12 @@ gapminder %>% head(3)
 
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Filter
 
-1\. Filtrer les données pour l'année 2007
+1\. Filtrer les données pour l'année 1984
 --
 
  - `r emo::ji("bulb")` : condition `==`  
@@ -157,10 +224,10 @@ gapminder %>% head(3)
 --
 ```{r}
 gapminder %>%
-  filter(year == 2007)
+  filter(year == 1984)
 ```
 --
-2\. Filtrer les données pour la Chine en 2002
+2\. Filtrer les données pour l'Espagne en 2002
 --
 
  - `r emo::ji("bulb")` : `&`  
@@ -168,10 +235,12 @@ gapminder %>%
 --
 ```{r}
 gapminder %>%
-  filter(country == "China" & year == 2002)
+  filter(country == "Spain" & year == 2002)
 ```
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Arrange
 
@@ -214,6 +283,8 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Mutate
 
@@ -237,6 +308,8 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Mutate 
 
@@ -261,6 +334,8 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Mutate 
 
@@ -287,6 +362,9 @@ gapminder %>%
 ```
 
 ---
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 
 # Select
@@ -324,6 +402,8 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Select
 
@@ -339,8 +419,19 @@ gapminder %>%
 gapminder %>%
   select_if(is.numeric)
 ```
+
+iris %>% 
+  purrr::keep(is.numeric) %>% 
+  head(2)
+  
+iris %>%
+  purrr::map_if(is.numeric, log) %>%
+  head(2)
+
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Summarise and group_by
 
@@ -361,6 +452,8 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
 
 # Summarise and group_by
 
@@ -381,7 +474,8 @@ gapminder %>%
 
 
 ---
-
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 # ggplot
 
@@ -400,6 +494,8 @@ Plusieurs sites pour vous aider à choisir un graphe :
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #ggplot geom_boxplot
 
@@ -438,6 +534,8 @@ p <- gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #ggplot geom_boxplot + plotly
 
@@ -456,6 +554,8 @@ htmltools::save_html(pg, file="ggplotly.html")
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #ggplot geom_point
 
@@ -476,6 +576,8 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #ggplot
 
@@ -505,10 +607,12 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #ggplot
 
-Here is the complete code for the plot : 
+Code complet du graphe : 
 
 ```{r, eval=FALSE}
 gapminder %>%
@@ -525,25 +629,29 @@ gapminder %>%
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #gganimate your ggplot
 
-Now let's animate this ggplot by year. 
+Animons le ggplot suivant les années. 
 
-It's the example of the [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")` by [Thomas Lin Pedersen](https://twitter.com/thomasp85). 
+Ceci est un exemple du [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")` de [Thomas Lin Pedersen](https://twitter.com/thomasp85). 
 
-It's very easy to animate your previous plot with **gganimate**:
+Il est très facile d'animer le graphe précédent avec **gganimate**:
 
-1\. Load the [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")`
+1\. Charger [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")`
 
-2\. Copy the code of your previous plot
+2\. Copier le code du graphe précédent
 
-3\. Change `title = 'Year: 2002'` to `title = 'Year: {frame_time}'` 
+3\. Modifier `title = 'Year: 2002'` en `title = 'Year: {frame_time}'` 
 
-4\. Then add `+  transition_time(year)` 
+4\. Puis ajouter `+  transition_time(year)` 
 
 ---
 
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div> 
 
 #And TADAAAAAA
 
