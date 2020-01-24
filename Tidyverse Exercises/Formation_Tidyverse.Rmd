@@ -31,7 +31,11 @@ layout: true
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 30-31 janvier 2020</span></div> 
+
+
+
 ---
+
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyverse.svg?sanitize=true)
 background-size: 550px
 background-position: 50% 50%
@@ -90,22 +94,47 @@ library(tidyverse)
   
   
 <br> 
+
   
-```{r, echo=FALSE}
+```{r, echo=FALSE , results='markup'}
+
 
 knitr::include_graphics("img/tidyband.png")
 
 ```
 
-
 ---
+
+background-image: url('img/Tidyverse.png')
+background-size: 900px
+background-position: 65% 45%
 
 <div class="my-footer"><span> <b>1. Présentation Tidyverse et tidy data  </b>   
 </span></div> 
 
-# Tidy Data
+---
 
-diapo TIdy data de RLadies
+background-image: url(https://media.giphy.com/media/FHEjBpiqMwSuA/giphy.gif)
+background-size: 400px
+background-position: 85% 25%
+
+
+<div class="my-footer"><span> <b>1. Présentation Tidyverse et tidy data  </b>   
+</span></div> 
+
+# Tidy data
+
+```{r echo=FALSE, out.width = "200px", results='markup'}
+
+knitr::include_graphics("img/wickham_president.jpg")
+
+```
+
+--
+
+
+![](img/tidy_data1.png)
+
 
 ---
 
@@ -184,6 +213,8 @@ background-position: 90% 3%
 </span></div> 
 
 # Pipe data
+
+<br> 
 
 .pull-left[
 
@@ -494,10 +525,11 @@ Plusieurs sites pour vous aider à choisir un graphe :
 
 ---
 
+
+# ggplot geom_boxplot
+
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
-
-#ggplot geom_boxplot
 
 1\. Tracer les boxplots de `lifeExp` par `continent`
 
@@ -534,10 +566,14 @@ p <- gapminder %>%
 
 ---
 
-<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
-</span></div> 
 
-#ggplot geom_boxplot + plotly
+# ggplot geom_boxplot + plotly
+
+
+<div class="my-footer"><span> <b>7. Visualiser les données  </b>   
+</span></div>
+
+
 
 ```{r,  message = FALSE, eval=FALSE}
 library(plotly)
@@ -554,10 +590,13 @@ htmltools::save_html(pg, file="ggplotly.html")
 
 ---
 
+
+# ggplot geom_point
+
+
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
 
-#ggplot geom_point
 
 1\. Essayer de reproduire ce graphe
 
@@ -576,10 +615,13 @@ gapminder %>%
 
 ---
 
+
+# ggplot
+
+
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
 
-#ggplot
 
 `r emo::ji("bulb")`  : 
 
@@ -607,10 +649,13 @@ gapminder %>%
 
 ---
 
+
+
+# ggplot
+
+
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
-
-#ggplot
 
 Code complet du graphe : 
 
@@ -632,7 +677,7 @@ gapminder %>%
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
 
-#gganimate your ggplot
+# gganimate your ggplot
 
 Animons le ggplot suivant les années. 
 
@@ -653,7 +698,7 @@ Il est très facile d'animer le graphe précédent avec **gganimate**:
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
 
-#And TADAAAAAA
+# And TADAAAAAA
 
 .center[![](img/thomas.gif) ]
 

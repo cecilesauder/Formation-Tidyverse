@@ -24,7 +24,11 @@ layout: true
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 &amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
 30-31 janvier 2020&lt;/span&gt;&lt;/div&gt; 
+
+
+
 ---
+
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyverse.svg?sanitize=true)
 background-size: 550px
 background-position: 50% 50%
@@ -70,9 +74,7 @@ background-position: 90% 3%
 
 # [www.tidyverse.org](www.tidyverse.org)
 
-
-
-
+1. Installer et charger le `tidyverse` 📦  
 
 
 
@@ -101,18 +103,38 @@ library(tidyverse)
   
   
 &lt;br&gt; 
+
   
-
-
+&lt;img src="img/tidyband.png" width="1147" /&gt;
 
 ---
+
+background-image: url('img/Tidyverse.png')
+background-size: 900px
+background-position: 65% 45%
 
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;1. Présentation Tidyverse et tidy data  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
 
-# Tidy Data
+---
 
-diapo TIdy data de RLadies
+background-image: url(https://media.giphy.com/media/FHEjBpiqMwSuA/giphy.gif)
+background-size: 400px
+background-position: 85% 25%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;1. Présentation Tidyverse et tidy data  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Tidy data
+
+&lt;img src="img/wickham_president.jpg" width="200px" /&gt;
+
+--
+
+
+![](img/tidy_data1.png)
+
 
 ---
 
@@ -122,17 +144,17 @@ diapo TIdy data de RLadies
 
 # Data
 
-Extrait du jeu de données [**gapminder**](https://www.gapminder.org/) ([**video ted**](https://www.gapminder.org/videos/ted-us-state-department/).  
+Extrait du jeu de données [**gapminder**](https://www.gapminder.org/) ([**video ted**](https://www.gapminder.org/videos/ted-us-state-department/))
 
-1. Installer et charger le `tidyverse` 📦  
-2. Installer et charger le `gapminder` 📦   
-3. Regarder le jeu de données gapminder (Est-il tidy ?)
+1. Installer et charger le `gapminder` 📦   
+2. Regarder le jeu de données gapminder (Est-il tidy ?)
 
 --
 
 
 ```r
 #install.packages(gapminder)
+
 library(gapminder)
 
 gapminder
@@ -270,6 +292,8 @@ background-position: 90% 3%
 &lt;/span&gt;&lt;/div&gt; 
 
 # Pipe data
+
+&lt;br&gt; 
 
 .pull-left[
 
@@ -595,10 +619,11 @@ Plusieurs sites pour vous aider à choisir un graphe :
 
 ---
 
+
+# ggplot geom_boxplot
+
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
-
-#ggplot geom_boxplot
 
 1\. Tracer les boxplots de `lifeExp` par `continent`
 
@@ -637,10 +662,14 @@ p &lt;- gapminder %&gt;%
 
 ---
 
-&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
-&lt;/span&gt;&lt;/div&gt; 
 
-#ggplot geom_boxplot + plotly
+# ggplot geom_boxplot + plotly
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt;
+
+
 
 
 ```r
@@ -655,21 +684,27 @@ ggplotly(p)
 
 ---
 
+
+# ggplot geom_point
+
+
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
 
-#ggplot geom_point
 
 1\. Essayer de reproduire ce graphe
 
-![](Formation_Tidyverse_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
 
 ---
+
+
+# ggplot
+
 
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
 
-#ggplot
 
 💡  : 
 
@@ -697,10 +732,13 @@ ggplotly(p)
 
 ---
 
+
+
+# ggplot
+
+
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
-
-#ggplot
 
 Code complet du graphe : 
 
@@ -723,7 +761,7 @@ gapminder %&gt;%
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
 
-#gganimate your ggplot
+# gganimate your ggplot
 
 Animons le ggplot suivant les années. 
 
@@ -744,7 +782,7 @@ Il est très facile d'animer le graphe précédent avec **gganimate**:
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
 
-#And TADAAAAAA
+# And TADAAAAAA
 
 .center[![](img/thomas.gif) ]
 
