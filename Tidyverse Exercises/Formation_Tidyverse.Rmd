@@ -177,15 +177,15 @@ read_csv2 (;)
 read_delim (?)
 
 
+<br>
+
+
 ```{r, results='markup'}
 
 gapminder_bis <- read_csv("data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.csv")
 
-gapminder_bis
-
 ```
 
-Si vous faites du webscraping avec rvest par exemple, vous 
 
 ---
 
@@ -198,7 +198,7 @@ background-position: 90% 3%
 
 # Import
 
-<br>
+<br> <br> <br>
 
 ```{r, results='markup'}
 
@@ -208,12 +208,71 @@ library(readxl)
 
 gapminder_bis <- read_xlsx("data/ratio_of_girls_to_boys_in_primary_and_secondary_education_perc.xlsx")
 
-gapminder_bis
 
 ```
 
 ---
 
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tibble.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+<div class="my-footer"><span> <b>2. Importer des données  </b>   
+</span></div> 
+
+# Tibble
+
+<br>
+
+```{r, results='markup'}
+
+gapminder_bis
+
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tibble.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 0.1%
+
+<div class="my-footer"><span> <b>2. Importer des données  </b>   
+</span></div> 
+
+# Tibble vs data.frame
+
+<br>
+
+```{r, results='markup'}
+
+as.data.frame(gapminder_bis)
+
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tibble.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+<div class="my-footer"><span> <b>2. Importer des données  </b>   
+</span></div> 
+
+# Tibble vs data.frame
+
+<br>
+
+```{r, results='markup'}
+
+head(as.data.frame(gapminder_bis), 3)
+
+```
+
+
+---
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg?sanitize=true)
 background-size: 100px
@@ -232,7 +291,7 @@ background-position: 90% 3%
 - old way : **verb(subject, complements)**  
 
 ```{r}
-head(gapminder,3)
+head(as.data.frame(gapminder_bis), 3)
 ```
 
 .center[![](https://media.giphy.com/media/BgBf6pW9qOgQU/giphy.gif) ]
@@ -244,7 +303,9 @@ head(gapminder,3)
 - pipe way : **subject %>% verb(complements)**
 
 ```{r}
-gapminder %>% head(3)
+gapminder_bis %>% 
+  as.data.frame() %>%
+  head(3)
 ```
 
 .center[![](https://media.giphy.com/media/4pvW2P5L1GmkM/giphy.gif)]
@@ -252,6 +313,143 @@ gapminder %>% head(3)
 
 
 ---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/pipe.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>3. Ceci n'est pas un pipe  </b>   
+</span></div> 
+
+# Pipe data
+
+<br>
+
+Reprendre le code précédent et exporter le résultat en csv : 
+  1. Sans '%>%'
+
+  
+--
+
+ - `r emo::ji("bulb")` : `write_csv()`  
+  
+--
+
+```{r, eval=FALSE}
+write_csv2(head(as.data.frame(gapminder_bis), 3), "tableau.csv")
+```
+
+--
+
+<br> 
+
+  2. Avec des '%>%'
+  
+--
+  
+```{r, eval=FALSE}
+gapminder_bis %>% 
+  as.data.frame() %>%
+  head(3) %>%
+  write_csv2("tableau.csv")
+```
+
+---
+
+<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+</span></div> 
+
+# Données
+
+
+
+```{r, results='markup'}
+gapminder
+```
+
+
+---
+
+<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+</span></div> 
+
+# Données
+
+
+
+```{r, results='markup'}
+gapminder_bis
+```
+
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+</span></div> 
+
+# Reshape
+
+
+1. Transformer `gapminder_bis` pour pouvoir le joindre à `gapminder`
+
+--
+
+ - `r emo::ji("bulb")` : 
+      - gather => pivot_longer
+      - spread => pivot_wider
+
+--
+
+```{r, results='markup'}
+gapminder_bis %>%
+  gather(key = year,  
+         value = "ratio_girls_to_boys", 
+         -country, 
+         na.rm = TRUE)
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+</span></div> 
+
+# Reshape
+
+1. Transformer `gapminder_bis` pour pouvoir le joindre à `gapminder`
+
+
+ - `r emo::ji("bulb")` : 
+      - gather => pivot_longer
+      - spread => pivot_wider
+
+
+
+```{r, results='markup'}
+gapminder_bis %>%
+  pivot_longer(-country, 
+               names_to = "year", 
+               values_to = "ratio_girls_to_boys", 
+               values_drop_na = TRUE)
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
@@ -280,6 +478,11 @@ gapminder %>%
   filter(country == "Spain" & year == 2002)
 ```
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
@@ -325,6 +528,11 @@ gapminder %>%
 
 ---
 
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
 
@@ -349,6 +557,11 @@ gapminder %>%
 ```
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
@@ -375,6 +588,11 @@ gapminder %>%
 ```
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
@@ -404,6 +622,11 @@ gapminder %>%
 ```
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
@@ -444,6 +667,11 @@ gapminder %>%
 
 ---
 
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
 
@@ -472,6 +700,11 @@ iris %>%
 
 ---
 
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
 
@@ -493,6 +726,11 @@ gapminder %>%
 ```
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
@@ -516,6 +754,11 @@ gapminder %>%
 
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
 
@@ -536,11 +779,16 @@ Plusieurs sites pour vous aider à choisir un graphe :
 
 ---
 
-
-# ggplot geom_boxplot
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
+
+# ggplot geom_boxplot
+
+
 
 1\. Tracer les boxplots de `lifeExp` par `continent`
 
@@ -577,13 +825,14 @@ p <- gapminder %>%
 
 ---
 
-
-# ggplot geom_boxplot + plotly
-
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div>
 
+# ggplot geom_boxplot + plotly
 
 
 ```{r,  message = FALSE, eval=FALSE}
@@ -601,12 +850,15 @@ htmltools::save_html(pg, file="ggplotly.html")
 
 ---
 
-
-# ggplot geom_point
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
 
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
+
+# ggplot geom_point
 
 
 1\. Essayer de reproduire ce graphe
@@ -626,12 +878,17 @@ gapminder %>%
 
 ---
 
-
-# ggplot
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
 
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
+
+
+# ggplot
+
 
 
 `r emo::ji("bulb")`  : 
@@ -660,13 +917,15 @@ gapminder %>%
 
 ---
 
-
-
-# ggplot
-
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
+
+# ggplot
+
 
 Code complet du graphe : 
 
@@ -684,6 +943,10 @@ gapminder %>%
 ```
 
 ---
+
+background-image: url(https://github.com/thomasp85/gganimate/blob/master/man/figures/logo.png?raw=true)
+background-size: 100px
+background-position: 90% 3%
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
@@ -705,6 +968,11 @@ Il est très facile d'animer le graphe précédent avec **gganimate**:
 4\. Puis ajouter `+  transition_time(year)` 
 
 ---
+
+background-image: url(https://github.com/thomasp85/gganimate/blob/master/man/figures/logo.png?raw=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 <div class="my-footer"><span> <b>7. Visualiser les données  </b>   
 </span></div> 
