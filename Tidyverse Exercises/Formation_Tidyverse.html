@@ -85,7 +85,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Attaching packages ────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
+## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──
 ```
 
 ```
@@ -96,7 +96,7 @@ library(tidyverse)
 ```
 
 ```
-## ── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()
 ```
@@ -1557,7 +1557,352 @@ gapminder_bis %&gt;%
 ## # … with 5,109 more rows
 ```
 
+
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;4. Transformer des données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Reshape
+
+1. Transformer `gapminder_bis` pour pouvoir le joindre à `gapminder`
+
+
+ - 💡 : 
+      - gather =&gt; pivot_longer
+      - spread =&gt; pivot_wider
+
+
+
+
+```r
+gapminder_ratio &lt;- gapminder_bis %&gt;%
+  pivot_longer(-country, 
+               names_to = "year", 
+               values_to = "ratio_girls_to_boys", 
+               values_drop_na = TRUE)
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Join
+
+
+```r
+gapminder %&gt;%
+  left_join(gapminder_ratio)
+```
+Erreur : Can't join on 'year' x 'year' because of incompatible types (character / integer)
+
+
+```r
+gapminder_ratio
+```
+
+```
+## # A tibble: 5,119 x 3
+##    country     year  ratio_girls_to_boys
+##    &lt;chr&gt;       &lt;chr&gt;               &lt;dbl&gt;
+##  1 Afghanistan 1970                0.167
+##  2 Afghanistan 1971                0.161
+##  3 Afghanistan 1972                0.161
+##  4 Afghanistan 1973                0.169
+##  5 Afghanistan 1974                0.167
+##  6 Afghanistan 1975                0.174
+##  7 Afghanistan 1976                0.181
+##  8 Afghanistan 1977                0.193
+##  9 Afghanistan 1978                0.199
+## 10 Afghanistan 1981                0.243
+## # … with 5,109 more rows
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Modifier une colonne
+
+
+
+
+
+```r
+gapminder_ratio %&gt;%
+  mutate(year = as.integer(year))
+```
+
+```
+## # A tibble: 5,119 x 3
+##    country      year ratio_girls_to_boys
+##    &lt;chr&gt;       &lt;int&gt;               &lt;dbl&gt;
+##  1 Afghanistan  1970               0.167
+##  2 Afghanistan  1971               0.161
+##  3 Afghanistan  1972               0.161
+##  4 Afghanistan  1973               0.169
+##  5 Afghanistan  1974               0.167
+##  6 Afghanistan  1975               0.174
+##  7 Afghanistan  1976               0.181
+##  8 Afghanistan  1977               0.193
+##  9 Afghanistan  1978               0.199
+## 10 Afghanistan  1981               0.243
+## # … with 5,109 more rows
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Modifier une colonne
+
+
+
+```r
+gapminder_ratio &lt;- gapminder_ratio %&gt;%
+  mutate(year = as.integer(year))
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Left join
+
+
+```r
+gapminder %&gt;%
+  left_join(gapminder_ratio)
+```
+
+```
+## Joining, by = c("country", "year")
+```
+
+```
+## Warning: Column `country` joining factor and character vector, coercing
+## into character vector
+```
+
+```
+## # A tibble: 1,704 x 7
+##    country     continent  year lifeExp     pop gdpPercap ratio_girls_to_bo…
+##    &lt;chr&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8.43e6      779.             NA    
+##  2 Afghanistan Asia       1957    30.3  9.24e6      821.             NA    
+##  3 Afghanistan Asia       1962    32.0  1.03e7      853.             NA    
+##  4 Afghanistan Asia       1967    34.0  1.15e7      836.             NA    
+##  5 Afghanistan Asia       1972    36.1  1.31e7      740.              0.161
+##  6 Afghanistan Asia       1977    38.4  1.49e7      786.              0.193
+##  7 Afghanistan Asia       1982    39.9  1.29e7      978.              0.484
+##  8 Afghanistan Asia       1987    40.8  1.39e7      852.             NA    
+##  9 Afghanistan Asia       1992    41.7  1.63e7      649.             NA    
+## 10 Afghanistan Asia       1997    41.8  2.22e7      635.             NA    
+## # … with 1,694 more rows
+```
+
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Right join
+
+
+```r
+gapminder %&gt;%
+  right_join(gapminder_ratio)
+```
+
+```
+## Joining, by = c("country", "year")
+```
+
+```
+## Warning: Column `country` joining factor and character vector, coercing
+## into character vector
+```
+
+```
+## # A tibble: 5,119 x 7
+##    country    continent  year lifeExp      pop gdpPercap ratio_girls_to_bo…
+##    &lt;chr&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Afghanist… &lt;NA&gt;       1970    NA         NA       NA               0.167
+##  2 Afghanist… &lt;NA&gt;       1971    NA         NA       NA               0.161
+##  3 Afghanist… Asia       1972    36.1 13079460      740.              0.161
+##  4 Afghanist… &lt;NA&gt;       1973    NA         NA       NA               0.169
+##  5 Afghanist… &lt;NA&gt;       1974    NA         NA       NA               0.167
+##  6 Afghanist… &lt;NA&gt;       1975    NA         NA       NA               0.174
+##  7 Afghanist… &lt;NA&gt;       1976    NA         NA       NA               0.181
+##  8 Afghanist… Asia       1977    38.4 14880372      786.              0.193
+##  9 Afghanist… &lt;NA&gt;       1978    NA         NA       NA               0.199
+## 10 Afghanist… &lt;NA&gt;       1981    NA         NA       NA               0.243
+## # … with 5,109 more rows
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Inner join
+
+
+```r
+gapminder %&gt;%
+  inner_join(gapminder_ratio)
+```
+
+```
+## Joining, by = c("country", "year")
+```
+
+```
+## Warning: Column `country` joining factor and character vector, coercing
+## into character vector
+```
+
+```
+## # A tibble: 655 x 7
+##    country     continent  year lifeExp     pop gdpPercap ratio_girls_to_bo…
+##    &lt;chr&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Afghanistan Asia       1972    36.1  1.31e7      740.              0.161
+##  2 Afghanistan Asia       1977    38.4  1.49e7      786.              0.193
+##  3 Afghanistan Asia       1982    39.9  1.29e7      978.              0.484
+##  4 Afghanistan Asia       2007    43.8  3.19e7      975.              0.570
+##  5 Albania     Europe     1982    70.4  2.78e6     3631.              0.933
+##  6 Albania     Europe     1987    72    3.08e6     3739.              0.941
+##  7 Albania     Europe     1992    71.6  3.33e6     2497.              1.01 
+##  8 Albania     Europe     1997    73.0  3.43e6     3193.              0.958
+##  9 Albania     Europe     2007    76.4  3.60e6     5937.              0.982
+## 10 Algeria     Africa     1972    54.5  1.48e7     4183.              0.624
+## # … with 645 more rows
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Full join
+
+
+```r
+gapminder %&gt;%
+  full_join(gapminder_ratio)
+```
+
+```
+## Joining, by = c("country", "year")
+```
+
+```
+## Warning: Column `country` joining factor and character vector, coercing
+## into character vector
+```
+
+```
+## # A tibble: 6,168 x 7
+##    country     continent  year lifeExp     pop gdpPercap ratio_girls_to_bo…
+##    &lt;chr&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8.43e6      779.             NA    
+##  2 Afghanistan Asia       1957    30.3  9.24e6      821.             NA    
+##  3 Afghanistan Asia       1962    32.0  1.03e7      853.             NA    
+##  4 Afghanistan Asia       1967    34.0  1.15e7      836.             NA    
+##  5 Afghanistan Asia       1972    36.1  1.31e7      740.              0.161
+##  6 Afghanistan Asia       1977    38.4  1.49e7      786.              0.193
+##  7 Afghanistan Asia       1982    39.9  1.29e7      978.              0.484
+##  8 Afghanistan Asia       1987    40.8  1.39e7      852.             NA    
+##  9 Afghanistan Asia       1992    41.7  1.63e7      649.             NA    
+## 10 Afghanistan Asia       1997    41.8  2.22e7      635.             NA    
+## # … with 6,158 more rows
+```
+
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;5. Manipuler les données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Join
+
+
+```r
+gapminder &lt;- gapminder %&gt;%
+  left_join(gapminder_ratio)
+```
+
+```
+## Joining, by = c("country", "year")
+```
+
+```
+## Warning: Column `country` joining factor and character vector, coercing
+## into character vector
+```
+
+---
+
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
 background-size: 100px
@@ -1569,7 +1914,7 @@ background-position: 90% 3%
 
 # Filter
 
-1\. Filtrer les données pour l'année 1984
+1\. Filtrer les données pour l'année 1982
 --
 
  - 💡 : condition `==`  
@@ -1578,7 +1923,7 @@ background-position: 90% 3%
 
 ```r
 gapminder %&gt;%
-  filter(year == 1984)
+  filter(year == 1982)
 ```
 --
 2\. Filtrer les données pour l'Espagne en 2002
@@ -1587,6 +1932,7 @@ gapminder %&gt;%
  - 💡 : `&amp;`  
 
 --
+
 
 ```r
 gapminder %&gt;%
@@ -1989,7 +2335,7 @@ background-position: 90% 3%
 
 1\. Essayer de reproduire ce graphe
 
-![](Formation_Tidyverse_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -2084,6 +2430,11 @@ Il est très facile d'animer le graphe précédent avec **gganimate**:
 4\. Puis ajouter `+  transition_time(year)` 
 
 ---
+
+background-image: url(https://github.com/thomasp85/gganimate/blob/master/man/figures/logo.png?raw=true)
+background-size: 100px
+background-position: 90% 3%
+
 
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;7. Visualiser les données  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 

@@ -444,7 +444,195 @@ gapminder_bis %>%
                values_drop_na = TRUE)
 ```
 
+
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tidyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+</span></div> 
+
+# Reshape
+
+1. Transformer `gapminder_bis` pour pouvoir le joindre à `gapminder`
+
+
+ - `r emo::ji("bulb")` : 
+      - gather => pivot_longer
+      - spread => pivot_wider
+
+
+
+```{r, results='markup'}
+gapminder_ratio <- gapminder_bis %>%
+  pivot_longer(-country, 
+               names_to = "year", 
+               values_to = "ratio_girls_to_boys", 
+               values_drop_na = TRUE)
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Join
+
+```{r,eval=FALSE, results='asis'}
+gapminder %>%
+  left_join(gapminder_ratio)
+```
+Erreur : Can't join on 'year' x 'year' because of incompatible types (character / integer)
+
+```{r, results='markup'}
+gapminder_ratio
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Modifier une colonne
+
+
+
+
+```{r, results='markup'}
+gapminder_ratio %>%
+  mutate(year = as.integer(year))
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Modifier une colonne
+
+
+```{r, results='markup'}
+gapminder_ratio <- gapminder_ratio %>%
+  mutate(year = as.integer(year))
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Left join
+
+```{r, results='markup'}
+gapminder %>%
+  left_join(gapminder_ratio)
+```
+
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Right join
+
+```{r, results='markup'}
+gapminder %>%
+  right_join(gapminder_ratio)
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Inner join
+
+```{r, results='markup'}
+gapminder %>%
+  inner_join(gapminder_ratio)
+```
+
+
+---
+
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Full join
+
+```{r, results='markup'}
+gapminder %>%
+  full_join(gapminder_ratio)
+```
+
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 100px
+background-position: 90% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Join
+
+```{r, results='markup'}
+gapminder <- gapminder %>%
+  left_join(gapminder_ratio)
+```
+
+---
+
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
 background-size: 100px
@@ -456,7 +644,7 @@ background-position: 90% 3%
 
 # Filter
 
-1\. Filtrer les données pour l'année 1984
+1\. Filtrer les données pour l'année 1982
 --
 
  - `r emo::ji("bulb")` : condition `==`  
@@ -464,7 +652,7 @@ background-position: 90% 3%
 --
 ```{r}
 gapminder %>%
-  filter(year == 1984)
+  filter(year == 1982)
 ```
 --
 2\. Filtrer les données pour l'Espagne en 2002
@@ -473,6 +661,7 @@ gapminder %>%
  - `r emo::ji("bulb")` : `&`  
 
 --
+
 ```{r}
 gapminder %>%
   filter(country == "Spain" & year == 2002)
