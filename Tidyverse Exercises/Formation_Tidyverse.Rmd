@@ -198,7 +198,7 @@ background-position: 97% 3%
 
 # Import
 
-<br> <br> <br>
+<br> <br>
 
 ```{r, results='markup'}
 
@@ -222,7 +222,6 @@ background-position: 97% 3%
 
 # Tibble
 
-<br>
 
 ```{r, results='markup'}
 
@@ -242,7 +241,6 @@ background-position: 97% 0.1%
 
 # Tibble vs data.frame
 
-<br>
 
 ```{r, results='markup'}
 
@@ -263,7 +261,6 @@ background-position: 97% 3%
 
 # Tibble vs data.frame
 
-<br>
 
 ```{r, results='markup'}
 
@@ -284,7 +281,6 @@ background-position: 97% 3%
 
 # Pipe data
 
-<br> 
 
 .pull-left[
 
@@ -325,7 +321,6 @@ background-position: 97% 3%
 
 # Pipe data
 
-<br>
 
 Reprendre le code précédent et exporter le résultat en csv : 
   1. Sans '%>%'
@@ -361,7 +356,7 @@ gapminder_bis %>%
 <div class="my-footer"><span> <b>4. Transformer des données  </b>   
 </span></div> 
 
-# Données
+# Data
 
 
 
@@ -375,7 +370,7 @@ gapminder
 <div class="my-footer"><span> <b>4. Transformer des données  </b>   
 </span></div> 
 
-# Données
+# Data
 
 
 
@@ -429,7 +424,6 @@ background-position: 97% 3%
 
 1. Transformer `gapminder_bis` pour pouvoir le joindre à `gapminder`
 
-
  - `r emo::ji("bulb")` : 
       - gather => pivot_longer
       - spread => pivot_wider
@@ -457,7 +451,6 @@ background-position: 97% 3%
 # Reshape
 
 1. Transformer `gapminder_bis` pour pouvoir le joindre à `gapminder`
-
 
  - `r emo::ji("bulb")` : 
       - gather => pivot_longer
