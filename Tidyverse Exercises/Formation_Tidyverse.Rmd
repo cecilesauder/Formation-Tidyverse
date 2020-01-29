@@ -56,11 +56,11 @@ background-position: 50% 50%
 
 3. Ceci n'est pas un pipe (magrittr)    
 
-4. Programmation fonctionnelle  (purrr)    
+4. Transformer et nettoyer (forcats, stringr, lubridate) 
 
 5. Manipuler les données (dplyr, tidyr, tibble)    
 
-6. Transformer et nettoyer (forcats, stringr, lubridate)    
+6. Programmation fonctionnelle  (purrr)   
 
 7. Modéliser (broom)    
 
@@ -213,6 +213,30 @@ gapminder_bis <- read_xlsx("data/ratio_of_girls_to_boys_in_primary_and_secondary
 
 ---
 
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/haven.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>2. Importer des données  </b>   
+</span></div>
+
+
+
+# `read_` and `write_`
+
+
+<br><br>
+
+
+- SPSS : `read_sav` and `read_por`
+
+- Stata : `read_dta()`
+
+- SAS : `read_sas()` and `read_xpt()`
+
+
+---
+
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tibble.svg?sanitize=true)
 background-size: 90px
 background-position: 97% 3%
@@ -278,6 +302,7 @@ background-position: 97% 3%
 
 <div class="my-footer"><span> <b>3. Ceci n'est pas un pipe  </b>   
 </span></div> 
+
 
 # Pipe data
 
@@ -353,7 +378,7 @@ gapminder_bis %>%
 
 ---
 
-<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
 </span></div> 
 
 # Data
@@ -367,7 +392,7 @@ gapminder
 
 ---
 
-<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
 </span></div> 
 
 # Data
@@ -386,7 +411,7 @@ background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tid
 background-size: 90px
 background-position: 97% 3%
 
-<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
 </span></div> 
 
 # Reshape
@@ -417,7 +442,7 @@ background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tid
 background-size: 90px
 background-position: 97% 3%
 
-<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
 </span></div> 
 
 # Reshape
@@ -445,7 +470,7 @@ background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/tid
 background-size: 90px
 background-position: 97% 3%
 
-<div class="my-footer"><span> <b>4. Transformer des données  </b>   
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
 </span></div> 
 
 # Reshape
@@ -465,6 +490,40 @@ gapminder_ratio <- gapminder_bis %>%
                values_to = "ratio_girls_to_boys", 
                values_drop_na = TRUE)
 ```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/stringr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# `str_`
+
+
+- `str_squish` `r emo::ji("heart")` `r emo::ji("heart")`
+
+- `str_to_lower` / `str_to_upper`
+
+- `str_replace_all`
+
+--
+
+
+```{r, results='markup'}
+test <- c("JEan Pierre ", "Paul  Dupond", "jean Pierre", "Paul Dupond")
+
+test %>%
+  str_replace_all(" ", "*")
+
+test %>%
+  str_squish() %>%
+  str_to_upper() 
+
+```
+
 
 
 ---
@@ -490,6 +549,8 @@ gapminder_ratio
 ```
 
 
+
+
 ---
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
@@ -500,9 +561,9 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
 
-# Modifier une colonne
+# Mutate
 
-
+Modifier une colonne existante
 
 
 ```{r, results='markup'}
@@ -520,7 +581,9 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>5. Manipuler les données  </b>   
 </span></div> 
 
-# Modifier une colonne
+# Mutate
+
+Modifier une colonne existante
 
 
 ```{r, results='markup'}
@@ -546,7 +609,6 @@ background-position: 97% 3%
 gapminder %>%
   left_join(gapminder_ratio)
 ```
-
 
 
 ---
@@ -816,24 +878,28 @@ background-position: 97% 3%
 
 # Select
 
-1\. Selectionner les continents `continent` et les pays `country`
+1\. Selectionner les continents `continent` et les pays `country` et supprimer les doublons.
 
 --
 
  - `r emo::ji("bulb")` : On peut utiliser `starts_with("c")` (mais ce n'est pas la seule solution)
+ - `r emo::ji("bulb")` : `distinct()`
+ 
 
 --
 
 ```{r}
 gapminder %>%
-  select(starts_with("c"))
+  select(starts_with("c")) %>%
+  distinct()
 ```
 
 ou
 
 ```{r}
 gapminder %>%
-  select(continent, country)
+  select(continent, country) %>%
+  distinct()
 ```
 
 --
@@ -872,15 +938,69 @@ gapminder %>%
   select_if(is.numeric)
 ```
 
-iris %>% 
-  purrr::keep(is.numeric) %>% 
-  head(2)
-  
-iris %>%
-  purrr::map_if(is.numeric, log) %>%
-  head(2)
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Summarise and count
+
+1. Combien y a t-il de continents, de pays, et d'années différents dans le jeu de données ? 
+
+--
+
+```{r, results='markup'}
+
+gapminder %>%
+  summarise(
+    country_number = n_distinct(country),
+    continent_number = n_distinct(continent),
+    year_number = n_distinct(year)
+  )
+
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>5. Manipuler les données  </b>   
+</span></div> 
+
+# Summarise and count
+
+1. Combien y a t-il de continents, de pays, et d'années différents dans le jeu de données ? 
+
+
+
+```{r, results='markup'}
+
+gapminder %>%
+  count(continent)
+
+```
+
+```{r, results='hide'}
+
+gapminder %>%
+  count(country)
+
+gapminder %>%
+  count(year)
+
+```
+
+---
+
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
 background-size: 90px
@@ -936,6 +1056,83 @@ gapminder %>%
 
 
 ---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/purrr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
+</span></div> 
+
+# Map
+
+
+1. Combien y a t-il de continents, de pays, et d'années différents dans le jeu de données ? 
+
+```{r}
+gapminder %>%
+  summarise(
+    country_number = n_distinct(country),
+    continent_number = n_distinct(continent),
+    year_number = n_distinct(year)
+  )
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/purrr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
+</span></div> 
+
+# Map
+
+
+1. Combien y a t-il de continents, de pays, et d'années différents dans le jeu de données ? 
+
+
+```{r, results='markup'}
+gapminder %>%
+  #select(country, continent, year) %>%
+  map(n_distinct)
+
+
+gapminder %>%
+  map_df(n_distinct)
+
+```
+
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/purrr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
+</span></div> 
+
+# map
+
+
+Pour aller plus loin : 
+
+
+- [Overview](https://purrr.tidyverse.org/)
+
+
+- [Itération de fonctions avec purrr, Lise Vaudor](http://perso.ens-lyon.fr/lise.vaudor/iterer-des-fonctions-avec-purrr/)
+
+  
+---
+
+
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
 background-size: 90px
@@ -1075,27 +1272,27 @@ background-position: 97% 3%
 
 `r emo::ji("bulb")`  : 
 
-1\. Use the aes `size` and `color`
+1\. Utiliser les aes `size` et `color`
 
 --
 
-2\. Add `geom_point` with a transparancy parameter `alpha`
+2\. Ajouter `geom_point` avec un paramètre de transparence `alpha`
 
 --
 
-3\. Change x scale in log scale with `scale_x_log10`
+3\. Changer l'échelle de x en échelle logarithmique avec `scale_x_log10`
 
 --
 
-4\. Adjust colors with `scale_colour_manual` and `country_colors`
+4\. Ajuster les couleurs avec `scale_colour_manual` et `country_colors`
 
 --
 
-5\. Adjust size points with `scale_size`
+5\. Ajuster la taille des points avec `scale_size`
 
 --
 
-6\. Use `facet_wrap` to plot the continents separatly 
+6\. Utiliser `facet_wrap` pour afficher les continents séparément.
 
 ---
 
@@ -1139,7 +1336,7 @@ Animons le ggplot suivant les années.
 
 Ceci est un exemple du [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")` de [Thomas Lin Pedersen](https://twitter.com/thomasp85). 
 
-Il est très facile d'animer le graphe précédent avec **gganimate**:
+Pour animer le graphe précédent avec **gganimate**:
 
 1\. Charger [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")`
 
@@ -1164,6 +1361,41 @@ background-position: 97% 3%
 .center[![](img/thomas.gif) ]
 
 
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>8. Modéliser  </b>   
+</span></div> 
+
+# broom
+
+ - Vignette : [Introduction to broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+ 
+
+```{r,  message = FALSE, eval=FALSE}
+library(plotly)
+
+g <- gapminder %>%
+  ggplot(aes(x = year, y = lifeExp, label = country)) +
+  geom_point() +
+  geom_label() +
+  geom_smooth()
+
+ggplotly(g)
+```
+
+```{r, eval=FALSE, echo = FALSE}
+pgg <- ggplotly(g)
+htmltools::save_html(pgg, file="ggplotly2.html")
+```
+
+ 
+<iframe src="ggplotly2.html" width="800" height="500" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
+
 ---
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/shiny.svg?sanitize=true)
@@ -1173,7 +1405,7 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>9. Communiquer  </b>   
 </span></div> 
 
-# Shiny
+# shiny
 
 
 ---
@@ -1185,7 +1417,7 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>9. Communiquer  </b>   
 </span></div> 
 
-# Rmarkdown
+# rmarkdown
 
 
 ---
@@ -1198,7 +1430,7 @@ background-position: 97% 3%
 </span></div> 
 
 
-# Blogdown
+# blogdown
 
 ---
 
@@ -1209,7 +1441,7 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>9. Communiquer  </b>   
 </span></div> 
 
-# Xaringan
+# xaringan
 
 
 ---
