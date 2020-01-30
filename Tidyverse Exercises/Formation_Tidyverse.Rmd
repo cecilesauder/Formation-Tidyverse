@@ -1100,6 +1100,25 @@ gapminder %>%
   #select(country, continent, year) %>%
   map(n_distinct)
 
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/purrr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
+</span></div> 
+
+# Map
+
+
+1. Combien y a t-il de continents, de pays, et d'années différents dans le jeu de données ? 
+
+
+```{r, results='markup'}
 
 gapminder %>%
   map_df(n_distinct)
@@ -1118,8 +1137,9 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
 </span></div> 
 
-# map
+# Map
 
+<br><br>
 
 Pour aller plus loin : 
 
@@ -1131,7 +1151,6 @@ Pour aller plus loin :
 
   
 ---
-
 
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/ggplot2.svg?sanitize=true)
@@ -1375,26 +1394,6 @@ background-position: 97% 3%
 
  - Vignette : [Introduction to broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
  
-
-```{r,  message = FALSE, eval=FALSE}
-library(plotly)
-
-g <- gapminder %>%
-  ggplot(aes(x = year, y = lifeExp, label = country)) +
-  geom_point() +
-  geom_label() +
-  geom_smooth()
-
-ggplotly(g)
-```
-
-```{r, eval=FALSE, echo = FALSE}
-pgg <- ggplotly(g)
-htmltools::save_html(pgg, file="ggplotly2.html")
-```
-
- 
-<iframe src="ggplotly2.html" width="800" height="500" scrolling="yes" seamless="seamless" frameBorder="0"> </iframe>
 
 ---
 
