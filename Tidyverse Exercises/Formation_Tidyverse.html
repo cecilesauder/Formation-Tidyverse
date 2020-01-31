@@ -1767,6 +1767,120 @@ frozen2 %&gt;%
 ## 4 Kristoff     1
 ```
 
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/lubridate.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;4. Transformer et nettoyer des données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Gérer les dates et heures avec lubridate
+
+
+.pull-left[
+ 
+
+```r
+library(lubridate)
+```
+
+
+ 
+
+```r
+now1 &lt;- now()
+now2 &lt;- now() + weeks(2) + hours(3)
+
+now1
+```
+
+```
+## [1] "2020-01-31 08:55:33 CET"
+```
+
+```r
+now2
+```
+
+```
+## [1] "2020-02-14 11:55:33 CET"
+```
+
+]
+
+.pull-right[
+ 
+&lt;img src="https://media.giphy.com/media/d3yxg15kJppJilnW/giphy.gif" height="250" /&gt;
+]
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/lubridate.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;4. Transformer et nettoyer des données  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+# Extraire des informations
+
+&lt;br&gt;
+
+.pull-left[
+
+
+```r
+month(now1)
+```
+
+```
+## [1] 1
+```
+
+```r
+year(now1)
+```
+
+```
+## [1] 2020
+```
+
+
+ - [Voir ces slides avec plein d'exemples](https://abichat.github.io/slides/factors_dates_strings/#39)
+ 
+]
+
+.pull-left[
+
+
+```r
+day(now1)
+```
+
+```
+## [1] 31
+```
+
+```r
+hour(now1)
+```
+
+```
+## [1] 8
+```
+
+```r
+now2 - now1
+```
+
+```
+## Time difference of 14.125 days
+```
+
+]
 
 ---
 
@@ -2768,7 +2882,7 @@ background-position: 97% 3%
 
 1\. Essayer de reproduire ce graphe
 
-![](Formation_Tidyverse_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -2960,7 +3074,7 @@ iris %&gt;%
   geom_point()
 ```
 
-![](Formation_Tidyverse_files/figure-html/unnamed-chunk-61-1.png)&lt;!-- --&gt;
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -3131,7 +3245,7 @@ augmented %&gt;%
     labs(x = "Fitted values", y = "Residuals")
 ```
 
-![](Formation_Tidyverse_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
 
 ---
 

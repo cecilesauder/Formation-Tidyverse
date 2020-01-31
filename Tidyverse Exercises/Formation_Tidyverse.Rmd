@@ -609,6 +609,86 @@ frozen2 %>%
 
 ```
 
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/lubridate.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# Gérer les dates et heures avec lubridate
+
+
+.pull-left[
+ 
+```{r, message=FALSE, warning=FALSE}
+library(lubridate)
+
+```
+
+
+ 
+```{r, results='markup'}
+now1 <- now()
+now2 <- now() + weeks(2) + hours(3)
+
+now1
+now2
+
+```
+
+]
+
+.pull-right[
+ 
+```{r, echo=FALSE, results='markup', out.height=250}
+
+knitr::include_graphics("https://media.giphy.com/media/d3yxg15kJppJilnW/giphy.gif")
+```
+]
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/lubridate.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# Extraire des informations
+
+<br>
+
+.pull-left[
+
+```{r, results='markup'}
+month(now1)
+
+year(now1)
+
+```
+
+
+ - [Voir ces slides avec plein d'exemples](https://abichat.github.io/slides/factors_dates_strings/#39)
+ 
+]
+
+.pull-left[
+
+```{r, results='markup'}
+day(now1)
+
+hour(now1)
+
+now2 - now1
+
+```
+
+]
 
 ---
 
