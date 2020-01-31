@@ -1999,10 +1999,13 @@ gapminder %&gt;%
 --
 
 
+
 ```r
 gapminder %&gt;%
   filter(country == "Spain" &amp; year == 2002)
 ```
+
+
 ---
 
 background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/dplyr.svg?sanitize=true)
@@ -2740,10 +2743,293 @@ background-position: 97% 3%
 &lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
 &lt;/span&gt;&lt;/div&gt; 
 
+
+#tidymodels
+
+
+```r
+#install.packages("tidymodels", dependencies = TRUE)
+#library(tidymodels)
+
+#tidy &lt;- broom::tidy
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
 # broom
 
  - Vignette : [Introduction to broom](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
  
+
+```r
+#install.packages("broom")
+library(broom)
+
+iris %&gt;% head(3)
+```
+
+```
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# broom
+
+
+
+```r
+iris %&gt;%
+  ggplot(aes( x = Sepal.Length, y = Petal.Length)) +
+  geom_point()
+```
+
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# Classic lm
+
+
+```r
+reg_simple &lt;- lm(Sepal.Length~Petal.Length, data = iris)
+
+summary(reg_simple)
+```
+
+```
+## 
+## Call:
+## lm(formula = Sepal.Length ~ Petal.Length, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.24675 -0.29657 -0.01515  0.27676  1.00269 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   4.30660    0.07839   54.94   &lt;2e-16 ***
+## Petal.Length  0.40892    0.01889   21.65   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.4071 on 148 degrees of freedom
+## Multiple R-squared:   0.76,	Adjusted R-squared:  0.7583 
+## F-statistic: 468.6 on 1 and 148 DF,  p-value: &lt; 2.2e-16
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# Tidy way
+
+- `tidy()`, `augment()`, et `glance()`
+
+- fonctionnent pour `lm`, `glm`, `nls`
+
+- mais aussi pour les tests `t.test`, `cor.test`, `wilcox.test`
+
+- [liste](https://cran.r-project.org/web/packages/broom/vignettes/available-methods.html) des méthodes disponibles 
+
+
+
+```r
+tidy(reg_simple)
+```
+
+```
+## # A tibble: 2 x 5
+##   term         estimate std.error statistic   p.value
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)     4.31     0.0784      54.9 2.43e-100
+## 2 Petal.Length    0.409    0.0189      21.6 1.04e- 47
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# Tidy way
+
+ - `augment` rajoute les fitted values et les résidus aux données de départ
+ 
+
+```r
+augment(reg_simple)
+```
+
+```
+## # A tibble: 150 x 9
+##    Sepal.Length Petal.Length .fitted .se.fit  .resid   .hat .sigma .cooksd
+##           &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1          5.1          1.4    4.88  0.0556  0.221  0.0186  0.408 2.85e-3
+##  2          4.9          1.4    4.88  0.0556  0.0209 0.0186  0.408 2.55e-5
+##  3          4.7          1.3    4.84  0.0571 -0.138  0.0197  0.408 1.18e-3
+##  4          4.6          1.5    4.92  0.0541 -0.320  0.0176  0.408 5.65e-3
+##  5          5            1.4    4.88  0.0556  0.121  0.0186  0.408 8.54e-4
+##  6          5.4          1.7    5.00  0.0511  0.398  0.0158  0.407 7.80e-3
+##  7          4.6          1.4    4.88  0.0556 -0.279  0.0186  0.408 4.55e-3
+##  8          5            1.5    4.92  0.0541  0.0800 0.0176  0.408 3.53e-4
+##  9          4.4          1.4    4.88  0.0556 -0.479  0.0186  0.407 1.34e-2
+## 10          4.9          1.5    4.92  0.0541 -0.0200 0.0176  0.408 2.20e-5
+## # … with 140 more rows, and 1 more variable: .std.resid &lt;dbl&gt;
+```
+
+
+ - `glance` donne un résumé des statistiques de la régression
+ 
+
+```r
+glance(reg_simple)
+```
+
+```
+## # A tibble: 1 x 11
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.760         0.758 0.407      469. 1.04e-47     2  -77.0  160.  169.
+## # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# Exemple de graphe des résidus
+
+
+
+```r
+augmented &lt;- augment(reg_simple, iris)
+
+augmented %&gt;% 
+  arrange(.fitted) %&gt;% 
+  mutate(.lowess = lowess(.fitted, .resid)[[2]]) %&gt;% 
+  ggplot() +
+    aes(x = .fitted) +
+    geom_hline(yintercept = 0, alpha = 0.5, linetype = "dashed") +
+    geom_line(aes(y = .lowess), color = "saddlebrown") +
+    geom_point(aes(y = .resid, color = Species)) +
+    labs(x = "Fitted values", y = "Residuals")
+```
+
+![](Formation_Tidyverse_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# Tidy way
+
+1. Faire un test de corrélation sur `Sepal.Length` et `Petal.Length`, puis tester les 3 fonctions de `broom` dessus.
+
+--
+
+
+```r
+ct &lt;- cor.test(iris$Sepal.Length, iris$Petal.Length)
+
+tidy(ct)
+```
+
+```
+## # A tibble: 1 x 8
+##   estimate statistic  p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1    0.872      21.6 1.04e-47       148    0.827     0.906 Pears…
+## # … with 1 more variable: alternative &lt;chr&gt;
+```
+
+```r
+#augment(ct)
+glance(ct)
+```
+
+```
+## # A tibble: 1 x 8
+##   estimate statistic  p.value parameter conf.low conf.high method
+##      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+## 1    0.872      21.6 1.04e-47       148    0.827     0.906 Pears…
+## # … with 1 more variable: alternative &lt;chr&gt;
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+&lt;div class="my-footer"&gt;&lt;span&gt; &lt;b&gt;8. Modéliser  &lt;/b&gt;   
+&lt;/span&gt;&lt;/div&gt; 
+
+
+# Tidy way
+
+ - Vignettes sur :
+  - [k-means](https://cran.r-project.org/web/packages/broom/vignettes/kmeans.html)
+  - [bootstraping](https://cran.r-project.org/web/packages/broom/vignettes/bootstrapping.html)
+  - [broom et dplyr(et tidyr et purrr)](https://cran.r-project.org/web/packages/broom/vignettes/broom_and_dplyr.html)
+  
+--
+
+ - Autres packages ::
+  - [modelr](https://github.com/tidyverse/modelr)
+
 
 ---
 
@@ -2801,7 +3087,8 @@ background-position: 97% 3%
 - [**Cheat sheets**](https://www.rstudio.com/resources/cheatsheets/)  
 - [**R Graph Gallery**](https://www.r-graph-gallery.com/) by [Yan Holtz](https://twitter.com/R_Graph_Gallery)
 - [**ggplot2 extensions**](https://www.ggplot2-exts.org/gallery/) by [Daniel Emaasit](https://twitter.com/emaasit)
-
+- [**Factors, dates and strings**](https://abichat.github.io/slides/factors_dates_strings/#1) by [Antoine](https://twitter.com/_abichat)
+- Sur twitter : #rstats #tidyverse #TidyTuesday
 
 .center[![](https://media.giphy.com/media/nEMmyUp4hl1QOzovKh/giphy.gif)]
 
