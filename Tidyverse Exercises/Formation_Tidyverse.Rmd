@@ -524,6 +524,90 @@ test %>%
 
 ```
 
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/forcats.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# factors
+
+```{r, results='markup'}
+frozen2 <- c("Anna",  "Sven", "Elsa", "Kristoff", "Anna", "Sven", "Elsa", "Elsa")
+
+frozen2 %>%
+  as.factor() #ordre alphabétique
+
+frozen2 %>%
+  as_factor() #ordre d'apparition
+```
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/forcats.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# Changer les noms des levels
+
+```{r, results='markup'}
+
+frozen2 %>%
+  fct_recode(Samantha = "Anna")
+
+
+frozen2 %>%
+  fct_relabel(str_to_upper)
+
+```
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/forcats.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# Trier les levels
+
+<br>
+
+ - selon une autre variable `fct_reorder`
+ 
+ - dans l'ordre d'apparition `fct_inorder`
+ 
+ - selon la fréquence d'apparition `fct_infreq`
+ 
+ - à l'envers `fct_rev`
+ 
+ - aléatoirement `fct_shuffle` ...
+
+
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/forcats.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>4. Transformer et nettoyer des données  </b>   
+</span></div> 
+
+# Compter le nombre d'apparition de chaque level
+
+```{r, results='markup'}
+frozen2 %>%
+  fct_count(sort = TRUE)
+
+```
 
 
 ---
@@ -1129,6 +1213,29 @@ gapminder %>%
 ```
 
 
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/purrr.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+
+<div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
+</span></div> 
+
+# Map2
+
+ - Exemple de `map2` avec `rnorm`
+ 
+```{r}
+
+n <- c(100,200,100)
+means <- c(10,5,30)
+
+map2(n,means,rnorm)
+```
+
+
 
 ---
 
@@ -1140,7 +1247,7 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>6. Programmation fonctionnelle  </b>   
 </span></div> 
 
-# Map
+# purrr
 
 <br><br>
 
@@ -1151,6 +1258,9 @@ Pour aller plus loin :
 
 
 - [Itération de fonctions avec purrr, Lise Vaudor](http://perso.ens-lyon.fr/lise.vaudor/iterer-des-fonctions-avec-purrr/)
+
+
+- [Happy dev with {purrr}](https://colinfay.me/happy-dev-purrr/)
 
   
 ---
@@ -1360,6 +1470,10 @@ Ceci est un exemple du [**gganimate**](https://github.com/thomasp85/gganimate/wi
 
 Pour animer le graphe précédent avec **gganimate**:
 
+`r icon::fa("exclamation-triangle")` les `r emo::ji("package")` `gifski` et `png` sont nécessaires
+
+<br>
+
 1\. Charger [**gganimate**](https://github.com/thomasp85/gganimate/wiki/Gapminder) `r emo::ji("package")`
 
 2\. Copier le code du graphe précédent
@@ -1367,6 +1481,9 @@ Pour animer le graphe précédent avec **gganimate**:
 3\. Modifier `title = 'Year: 2002'` en `title = 'Year: {frame_time}'` 
 
 4\. Puis ajouter `+  transition_time(year)` 
+
+
+
 
 ---
 
@@ -1485,6 +1602,7 @@ background-position: 97% 3%
 
 # Tidy way
 
+
 - `tidy()`, `augment()`, et `glance()`
 
 - fonctionnent pour `lm`, `glm`, `nls`
@@ -1493,6 +1611,8 @@ background-position: 97% 3%
 
 - [liste](https://cran.r-project.org/web/packages/broom/vignettes/available-methods.html) des méthodes disponibles 
 
+
+<br>
 
 ```{r, results= 'markup'}
 
@@ -1520,6 +1640,17 @@ augment(reg_simple)
 
 ``` 
 
+---
+
+background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/broom.svg?sanitize=true)
+background-size: 90px
+background-position: 97% 3%
+
+<div class="my-footer"><span> <b>8. Modéliser  </b>   
+</span></div> 
+
+
+# Tidy way
 
  - `glance` donne un résumé des statistiques de la régression
  
@@ -1542,7 +1673,7 @@ background-position: 97% 3%
 # Exemple de graphe des résidus
 
 
-```{r, results= 'markup'}
+```{r, results= 'markup', fig.height=3}
 
 augmented <- augment(reg_simple, iris)
 
@@ -1552,7 +1683,7 @@ augmented %>%
   ggplot() +
     aes(x = .fitted) +
     geom_hline(yintercept = 0, alpha = 0.5, linetype = "dashed") +
-    geom_line(aes(y = .lowess), color = "saddlebrown") +
+    geom_line(aes(y = .lowess)) +
     geom_point(aes(y = .resid, color = Species)) +
     labs(x = "Fitted values", y = "Residuals")
 ```
@@ -1596,12 +1727,20 @@ background-position: 97% 3%
 
 # Tidy way
 
+
+
  - Vignettes sur :
+ 
   - [k-means](https://cran.r-project.org/web/packages/broom/vignettes/kmeans.html)
+  
   - [bootstraping](https://cran.r-project.org/web/packages/broom/vignettes/bootstrapping.html)
+  
   - [broom et dplyr(et tidyr et purrr)](https://cran.r-project.org/web/packages/broom/vignettes/broom_and_dplyr.html)
   
+  
 --
+
+<br>
 
  - Résumé : [Modeling in Tidyverse](https://static1.squarespace.com/static/51156277e4b0b8b2ffe11c00/t/5b75871e21c67c985a06f481/1534428959053/RPharma_18_Kuhn.pdf) by [Max Kuhn](https://twitter.com/topepos)
 
@@ -1615,7 +1754,22 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>9. Communiquer  </b>   
 </span></div> 
 
-# shiny
+# Shiny
+
+
+ - Cliquer sur File/New File/Shiny Web App 
+ 
+ - Ajouter un autre histogramme dans le main panel fait avec `ggplot`
+ 
+ - Ajouter dans la sidebar une entrée texte
+ 
+ - Récupérer ce texte pour l'annoter sur l'histogramme
+ 
+ <br>
+ 
+ - [shiny tutorials](https://shiny.rstudio.com/tutorial/)
+ 
+ - [Déployer](https://shiny.rstudio.com/deploy/) son application sur [shinyapps.io](https://www.shinyapps.io/) en quelques minutes
 
 
 ---
@@ -1627,45 +1781,70 @@ background-position: 97% 3%
 <div class="my-footer"><span> <b>9. Communiquer  </b>   
 </span></div> 
 
-# rmarkdown
+# mais aussi
+
+<br>
+
+ - [rmarkdown](https://rmarkdown.rstudio.com/lesson-1.html) - rapports reproductibles
+ 
+ - [blogdown](https://bookdown.org/yihui/blogdown/) - Sites web / blogs
+ 
+ - [xaringan](https://bookdown.org/yihui/rmarkdown/xaringan.html) - slides pdf ou html
+ 
+ - [pagedown](https://github.com/rstudio/pagedown) - thèses, articles scientifiques, CV, posters, lettres, cartes de visite...
+
+
 
 
 ---
 
-background-image: url(https://github.com/rstudio/hex-stickers/raw/master/SVG/blogdown.svg?sanitize=true)
-background-size: 90px
-background-position: 97% 3%
-
-<div class="my-footer"><span> <b>9. Communiquer  </b>   
-</span></div> 
+background-image: url(https://media.giphy.com/media/nEMmyUp4hl1QOzovKh/giphy.gif)
+background-size: 250px
+background-position: 85% 15%
 
 
-# blogdown
 
----
+# Thanks !
 
-background-image: url(https://user-images.githubusercontent.com/163582/45438104-ea200600-b67b-11e8-80fa-d9f2a99a03b0.png)
-background-size: 90px
-background-position: 97% 3%
-
-<div class="my-footer"><span> <b>9. Communiquer  </b>   
-</span></div> 
-
-# xaringan
-
-
----
-
-
-# Thanks!
 
 - [**Cheat sheets**](https://www.rstudio.com/resources/cheatsheets/)  
+
 - [**R Graph Gallery**](https://www.r-graph-gallery.com/) by [Yan Holtz](https://twitter.com/R_Graph_Gallery)
+
 - [**ggplot2 extensions**](https://www.ggplot2-exts.org/gallery/) by [Daniel Emaasit](https://twitter.com/emaasit)
-- [**Factors, dates and strings**](https://abichat.github.io/slides/factors_dates_strings/#1) by [Antoine](https://twitter.com/_abichat)
+
+- [**Factors, dates and strings**](https://abichat.github.io/slides/factors_dates_strings/#1) by [Antoine Bichat](https://twitter.com/_abichat)
+
 - Sur twitter : #rstats #tidyverse #TidyTuesday
 
-.center[![](https://media.giphy.com/media/nEMmyUp4hl1QOzovKh/giphy.gif)]
+
+.pull-left[.right[
+
+```{r, echo = FALSE, out.height=200, results='markup'}
+knitr::include_graphics("https://avatars3.githubusercontent.com/u/7116394?s=400&u=dce203e7a67bb6c4eccf3fd3dd2937335a2cf880&v=4")
+```
+
+]]
+.pull-right[.pull-down[
+
+<a href="mailto:cecile.sauder@gmail.com">
+.white[`r icon::fa("paper-plane")` cecile.sauder@gmail.com]
+</a>
+
+<a href="https://cecilesauder.netlify.com/">
+.white[`r icon::fa("link")` cecilesauder.netlify.com]
+</a>
+
+<a href="http://twitter.com/cecilesauder">
+.white[`r icon::fa("twitter")` @cecilesauder]
+</a>
+
+<a href="http://github.com/cecilesauder">
+.white[`r icon::fa("github")` @cecilesauder]
+</a>
+
+
+]]
 
 Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan) with the [**R-Ladies theme**](https://github.com/rladies/resources/blob/master/xaringan-slides/how_to_use.md) 
 
